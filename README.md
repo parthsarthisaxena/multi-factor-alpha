@@ -1,4 +1,5 @@
 # 📈 Multi-Factor Alpha Strategy (Indian Equities)
+Achieves ~24% CAGR with Sharpe ~1.2 using momentum-based alpha signals on Indian equities.
 
 ## 🚀 Overview
 
