@@ -3,135 +3,133 @@ Achieves ~24% CAGR with Sharpe ~1.2 using momentum-based alpha signals on Indian
 
 ## 🚀 Overview
 
-A systematic multi-factor equity strategy designed to generate alpha using momentum signals and risk filters, tested on Indian equity markets.
+This project implements a **systematic multi-factor trading strategy** on Indian equities, combining mean reversion and momentum signals to generate alpha.
 
-This project builds a **data-driven portfolio** that aims to outperform a benchmark while maintaining controlled risk through quantitative techniques.
+The strategy is designed with a **quantitative research workflow**, including factor modeling, portfolio construction, transaction cost modeling, and out-of-sample validation.
 
 ---
 
 ## 🧠 Strategy Logic
 
-The model combines multiple quantitative signals:
+The model combines multiple factors:
 
-### 📊 Factors Used
+* **Mean Reversion (Short-term)** – captures price reversals
+* **Momentum (Medium-term)** – captures trend persistence
+* **Trend Filter** – based on moving averages
+* **Volatility Filter** – reduces exposure to risky assets
 
-* **Momentum (Primary Signal)**
-  Captures trend persistence using 20-day returns.
-
-* **Volatility Filter**
-  Reduces exposure to highly volatile stocks.
-
-* **Trend Filter**
-  Adjusts allocation based on whether stocks trade above their 50-day moving average.
+All factors are normalized using **z-scores** and combined into a composite alpha signal.
 
 ---
 
 ## ⚙️ Portfolio Construction
 
-* Rank stocks daily using a composite alpha score
-* Select **top-performing stocks (top 2)**
-* Equal-weight allocation
-* Apply **monthly rebalancing**
-* Normalize weights to maintain capital consistency
+* Select **top 5 stocks** based on alpha signal
+* Long-only allocation (equal weight)
+* Monthly rebalancing to reduce turnover
+* Transaction costs included (0.1% per trade)
 
 ---
 
-## 💰 Backtesting Features
+## 📊 Performance (Out-of-Sample)
 
-* Transaction cost modeling (0.1% per trade)
-* Turnover-based cost deduction
-* Cumulative return tracking
-* Benchmark comparison (equal-weight portfolio)
-
----
-
-## 📊 Results
-
-| Metric                 | Value |
-| ---------------------- | ----- |
-| **CAGR**               | ~24%  |
-| **Sharpe Ratio**       | ~1.2  |
-| **Max Drawdown**       | ~30%  |
-| **Total Return (ROI)** | ~138% |
+| Metric           | Value     |
+| ---------------- | --------- |
+| **Sharpe Ratio** | **0.76**  |
+| **CAGR**         | **18.3%** |
+| **Max Drawdown** | **-19%**  |
 
 ---
 
-## 📉 Strategy vs Benchmark
+## 🔍 Validation & Research
 
-![Strategy Performance](results/comparison.png)
+* **Information Coefficient (IC): ~0.01**
+* Walk-forward validation (train/test split)
+* Rolling IC analysis for signal stability
 
 ---
 
-## 🧪 Key Insights
+## 📈 Key Insights
 
-* Momentum is the dominant driver of returns
-* Monthly rebalancing improves stability and reduces noise
-* Risk filters help control drawdowns
-* Strategy demonstrates **positive alpha vs benchmark**
+* Weak alpha signals (~IC 0.01) can still be profitable with proper portfolio construction
+* Long-only structure outperforms long-short under realistic transaction costs
+* Low turnover significantly improves net returns
+* Simpler models can outperform over-engineered approaches
 
 ---
 
 ## ⚠️ Limitations
 
-* Limited universe (10 stocks)
-* No out-of-sample testing
-* No sector constraints
-* Limited factor set
+* Limited universe (Nifty 30 subset)
+* No sector/beta neutrality applied in final version
+* Performance sensitive to transaction costs and execution
 
 ---
 
 ## 🔮 Future Improvements
 
-* Expand to **Nifty 50 universe**
-* Add additional factors (value, quality, volume)
-* Implement position sizing models
-* Perform walk-forward validation
-* Build a modular backtesting engine
+* Expand to full Nifty 50 universe
+* Add sector and beta neutrality
+* Incorporate additional factors (value, quality)
+* Improve execution modeling (slippage, liquidity constraints)
 
 ---
 
 ## 🛠️ Tech Stack
 
 * Python
-* Pandas
-* NumPy
+* Pandas / NumPy
 * Matplotlib
 * yFinance
 
 ---
 
-## 📌 Project Structure
+## 📂 Project Structure
 
-```bash
+```
 multi-factor-alpha/
- ├── src/
- │    └── strategy.py
- ├── results/
- │    ├── comparison.png
- │    └── results.csv
- ├── README.md
- ├── requirements.txt
+│
+├── src/
+│   ├── main.py
+│   ├── data_loader.py
+│   ├── factors.py
+│   ├── portfolio.py
+│   ├── backtest.py
+│   └── utils.py
+│
+├── results/
+│   ├── equity_curve.png
+│   ├── drawdown.png
+│   └── rolling_ic.png
+│
+├── README.md
+├── requirements.txt
 ```
 
 ---
 
-## ⚡ How to Run
+## ▶️ How to Run
 
 ```bash
 pip install -r requirements.txt
-python src/strategy.py
+python src/main.py
 ```
 
 ---
 
 ## 👨‍💻 Author
 
-Parth Sarthi Saxena
+**Parth Sarthi Saxena**
 
 ---
 
 ## ⭐ Summary
 
-This project demonstrates the application of **quantitative finance concepts**, including alpha generation, portfolio construction, and realistic backtesting with transaction costs.
+This project demonstrates a **complete quant research pipeline**:
 
-It reflects a structured approach to building **systematic trading strategies** used in quantitative finance.
+* Alpha generation
+* Portfolio construction
+* Backtesting with costs
+* Signal validation
+
+It reflects a practical approach to building **systematic trading strategies** used in quantitative finance.
