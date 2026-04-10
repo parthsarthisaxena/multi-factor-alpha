@@ -4,7 +4,7 @@ def construct_portfolio(alpha):
     weights = pd.DataFrame(index=alpha.index, columns=alpha.columns)
 
     prev_w = pd.Series(0.0, index=alpha.columns)
-
+#looping through the function
     for date in alpha.index:
         # 🔥 Monthly rebalance
         if date.day != 1:
