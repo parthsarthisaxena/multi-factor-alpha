@@ -29,5 +29,6 @@ def compute_factors(prices):
         0.1 * z_trend -
         0.1 * z_vol
     )
-
+#hi
+    
     return alpha.dropna()
